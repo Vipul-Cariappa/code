@@ -1,0 +1,19 @@
+{% extends "challenge/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success" role="alert">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+
+<div class="container">
+    <p>hello</p>
+</div>
+{% endblock %}
