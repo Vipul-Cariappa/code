@@ -1,0 +1,20 @@
+question:
+Fibonacci Series.
+
+solution:
+def function(x):
+  if x < 3:
+    return 1
+  return fib(x-1) + fib(x-2)
+
+
+test case:
+def test_case(func):
+  assert func(1) == 1
+  assert func(2) == 1
+  assert func(3) == 2
+
+
+Evaluate test:
+def evaluate(func):
+  assert func(3) == 2
