@@ -1,6 +1,9 @@
-def check_answer(answer):
+def validate(answer):
     return True
 
 
-def evaluate_answer(answer, tests):
-    return (1, 1, 100)
+def run_tests(answer, test):
+    exec(answer, globals(), globals())
+    exec(test, globals(), globals())
+
+    test_case(function)
