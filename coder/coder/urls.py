@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('registry.urls', namespace="user")),
     path('', include('challenge.urls', namespace="chanllenge")),
+    path('', include('tutorial.urls', namespace="tutorial")),
 ]

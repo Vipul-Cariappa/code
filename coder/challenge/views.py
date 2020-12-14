@@ -107,7 +107,7 @@ def answer(request, question_id):
             post.character = 0
             active_user = request.user
             post.user = active_user
-            # post.save()
+            post.save()
             messages.success(request, f"Answerd")
             return redirect('challenge:home')
     else:

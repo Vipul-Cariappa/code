@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['192.168.0.100']
 INSTALLED_APPS = [
     'challenge.apps.ChallengeConfig',
     'registry.apps.RegistryConfig',
+    'tutorial.apps.TutorialConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
