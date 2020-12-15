@@ -21,8 +21,54 @@
     <form method="post">
         <div class="container">{% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="btn btn-outline-primary">Submit</button></div>
+            <button type="button" class="btn btn-outline-primary" id="form_button">Test</button>
+        </div>
     </form>
 </div>
 
+<script type="text/javascript">
+    var button = document.getElementById('form_button')
+    var url = "http://192.168.0.100:8000/test-answer/{{ question.id }}"
+
+    button.addEventListener("click", function () {
+        var solution = document.getElementById('solution').value
+        console.log(solution, button.value)
+        if (button.innerHTML === "Test") {
+
+            console.log(JSON.stringify({ solution: solution }))
+
+            // start
+            fetch(url, {
+
+                // Adding method type 
+                method: "POST",
+
+                // Adding body or contents to send 
+                body: JSON.stringify({
+                    solution: solution
+                }),
+
+                // Adding headers to the request 
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+
+                // Converting to JSON 
+                .then(response => response.json())
+
+                // Displaying results to console 
+                .then(json => console.log(json));
+            // end
+
+            button.innerText = "Submit"
+        } else {
+
+        }
+
+
+    })
+
+    var solution = document.getElementById('form_button')
+</script>
 {% endblock %}

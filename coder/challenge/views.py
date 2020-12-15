@@ -1,3 +1,6 @@
+import json
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -7,6 +10,8 @@ from pyutility import limit_resource, measureit
 from .forms import QuestionForm, AnswerForm
 from .models import Question, Answer
 from .functions import validate, run_tests
+
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -42,7 +47,6 @@ def question_new(request):
                     messages.success(request, f"Memory Error")
                     return redirect('challenge:fail')
                 except Exception as e:
-                    raise e
                     messages.success(request, f"{e}")
                     return redirect('challenge:fail')
             else:
@@ -65,6 +69,38 @@ def question_new(request):
     return render(request, 'challenge/new_challenge.html', context)
 
 
+@csrf_exempt
+def answer_test(request, question_id):
+    active_user = request.user
+    question = get_object_or_404(Question, pk=question_id)
+
+    if request.method == "POST":
+        print(request.POST)
+        ans = request.POST["solution"]  # this can raise error
+
+        if form.is_valid():
+            if validate(ans):
+
+                try:
+                    limit_resource(run_tests, time=15,
+                                   memory=75, args=(ans, question.test_case))
+                except AssertionError:
+                    content = {"result": "failed", "error": "Assertion Error"}
+                except TimeoutError:
+                    content = {"result": "failed", "error": "Timeout Error"}
+                except MemoryError:
+                    content = {"result": "failed", "error": "Memory Error"}
+                except Exception as e:
+                    content = {"result": "failed", "error": f"{e}"}
+                else:
+                    content = {"result": "passed"}
+            else:
+                content = {"result": "failed",
+                           "error": "Bad Function Name or Other problem"}
+
+    return HttpResponse(json.dumps(content), content_type="application/json")
+
+
 @login_required
 def answer(request, question_id):
     active_user = request.user
@@ -75,31 +111,8 @@ def answer(request, question_id):
         if form.is_valid():
             post = form.save(commit=False)
             ans = form.cleaned_data.get('answer')
-            if validate(ans):
-
-                try:
-                    limit_resource(run_tests, time=15,
-                                   memory=75, args=(ans, question.test_case))
-                except AssertionError:
-                    messages.success(request, f"Assertion Error")
-                    return redirect('challenge:fail')
-                except TimeoutError:
-                    messages.success(request, f"Time Out Error")
-                    return redirect('challenge:fail')
-                except MemoryError:
-                    messages.success(request, f"Memory Error")
-                    return redirect('challenge:fail')
-                except Exception as e:
-                    raise e
-                    messages.success(request, f"{e}")
-                    return redirect('challenge:fail')
-                else:
-                    score = measureit(run_tests, args=(
-                        ans, question.test_case))
-            else:
-                messages.success(
-                    request, f"Bad Function Name or Other problem")
-                return redirect('challenge:fail')
+            # score = measureit(run_tests, args=(
+            #     ans, question.test_case))
 
             post.question = question
             post.memory = score[0]
@@ -107,7 +120,7 @@ def answer(request, question_id):
             post.character = 0
             active_user = request.user
             post.user = active_user
-            post.save()
+            # post.save()
             messages.success(request, f"Answerd")
             return redirect('challenge:home')
     else:
