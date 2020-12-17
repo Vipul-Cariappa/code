@@ -11,8 +11,6 @@ from .forms import QuestionForm, AnswerForm
 from .models import Question, Answer
 from .functions import validate, run_tests
 
-from django.views.decorators.csrf import csrf_exempt
-
 # Create your views here.
 
 
