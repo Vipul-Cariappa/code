@@ -5,7 +5,7 @@ from .models import Question, Answer
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ("question", "solution", "test_case")
+        fields = ("title", "question", "solution", "test_case")
 
 
 class AnswerForm(forms.ModelForm):
@@ -14,5 +14,5 @@ class AnswerForm(forms.ModelForm):
         fields = ("answer",)
 
         widgets = {
-            'answer': forms.Textarea(attrs={'id': 'solution'}),
+            'answer': forms.Textarea(attrs={'id': 'solution', "onKeyUp": "text_change()"}),
         }

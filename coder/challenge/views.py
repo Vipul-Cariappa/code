@@ -69,34 +69,35 @@ def question_new(request):
     return render(request, 'challenge/new_challenge.html', context)
 
 
-@csrf_exempt
 def answer_test(request, question_id):
     active_user = request.user
     question = get_object_or_404(Question, pk=question_id)
 
     if request.method == "POST":
-        print(request.POST)
-        ans = request.POST["solution"]  # this can raise error
 
-        if form.is_valid():
-            if validate(ans):
+        ans = json.loads(request.body.decode("utf-8")
+                         )["solution"]  # this can raise error
 
-                try:
-                    limit_resource(run_tests, time=15,
-                                   memory=75, args=(ans, question.test_case))
-                except AssertionError:
-                    content = {"result": "failed", "error": "Assertion Error"}
-                except TimeoutError:
-                    content = {"result": "failed", "error": "Timeout Error"}
-                except MemoryError:
-                    content = {"result": "failed", "error": "Memory Error"}
-                except Exception as e:
-                    content = {"result": "failed", "error": f"{e}"}
-                else:
-                    content = {"result": "passed"}
+        if validate(ans):
+
+            try:
+                limit_resource(run_tests, time=15,
+                               memory=75, args=(ans, question.test_case))
+            except AssertionError:
+                content = {"result": "failed", "error": "Assertion Error"}
+            except TimeoutError:
+                content = {"result": "failed", "error": "Timeout Error"}
+            except MemoryError:
+                content = {"result": "failed", "error": "Memory Error"}
+            except Exception as e:
+                content = {"result": "failed", "error": f"{e}"}
             else:
-                content = {"result": "failed",
-                           "error": "Bad Function Name or Other problem"}
+                content = {"result": "passed"}
+        else:
+            content = {"result": "failed",
+                       "error": "Bad Function Name or Other problem"}
+    else:
+        content = {}
 
     return HttpResponse(json.dumps(content), content_type="application/json")
 
@@ -111,16 +112,16 @@ def answer(request, question_id):
         if form.is_valid():
             post = form.save(commit=False)
             ans = form.cleaned_data.get('answer')
-            # score = measureit(run_tests, args=(
-            #     ans, question.test_case))
+            score = measureit(run_tests, args=(
+                ans, question.test_case))
 
             post.question = question
             post.memory = score[0]
             post.time = score[1]
-            post.character = 0
+            post.character = len(ans)
             active_user = request.user
             post.user = active_user
-            # post.save()
+            post.save()
             messages.success(request, f"Answerd")
             return redirect('challenge:home')
     else:
@@ -136,3 +137,11 @@ def answer(request, question_id):
 
 def fail(request):
     return render(request, 'challenge/fail.html', {})
+
+
+def question_list(request):
+    li = Question.objects.all()
+    return render(request, "challenge/question_list.html", {"questions": li})
+
+
+# def result_answer(request)
