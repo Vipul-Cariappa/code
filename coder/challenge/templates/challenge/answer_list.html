@@ -1,0 +1,42 @@
+{% extends "challenge/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success" role="alert">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">User</th>
+                <th scope="col">Character</th>
+                <th scope="col">Memory</th>
+                <th scope="col">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in answers %}
+            <tr>
+                <td>
+                    <a href="{% url 'challenge:view-answer' i.pk %}">
+                        {{ i.user }}
+                    </a>
+                </td>
+                <td>{{ i.character }}</td>
+                <td>{{ i.memory }}</td>
+                <td>{{ i.time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

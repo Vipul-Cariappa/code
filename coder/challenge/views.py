@@ -144,4 +144,12 @@ def question_list(request):
     return render(request, "challenge/question_list.html", {"questions": li})
 
 
-# def result_answer(request)
+def result_answer(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    answers = Answer.objects.filter(question=question)
+    return render(request, "challenge/answer_list.html", {"answers": answers})
+
+
+def answer_view(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    return render(request, "challenge/answer_view.html", {"answer": answer})
