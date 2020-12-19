@@ -63,8 +63,8 @@
     var button = document.getElementById('form_button')
 
     button.addEventListener("click", function () {
-        s_editor.toTextArea()
-        q_editor.toTextArea()
+        s_editor.save()
+        q_editor.save()
         button.type = "submit"
         button.click()
     })
