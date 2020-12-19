@@ -4,6 +4,16 @@
 
 {% load static %}
 
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/theme/monokai.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/addon/edit/closebrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/addon/selection/active-line.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 {% if messages %}
@@ -48,21 +58,36 @@
         }
         return cookieValue;
     }
+
     var csrftoken = getCookie('csrftoken');
 
-    var button = document.getElementById('form_button')
-    var error_ele = document.getElementById('error')
-    var url_test = "http://localhost:8000/test-answer/{{ question.id }}"
-    var url_submit = "http://localhost:8000/answer/{{ question.id }}"
+    var editor = new CodeMirror.fromTextArea(document.getElementById('solution'), {
+        value: "def function(...):\n    # code goes here", // not working
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        indentUnit: 4,
+        indentWithTabs: false,
+        lineWrapping: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        styleActiveLine: true,
+    });
 
-    function text_change() {
+
+    editor.on("keydown", function () {
         button.innerHTML = "Test"
         error_ele.innerHTML = "Status: Answering"
         error_ele.style.backgroundColor = "lightblue"
-    }
+    })
+
+    var button = document.getElementById('form_button')
+    var error_ele = document.getElementById('error')
+    var url_test = "http://192.168.0.100:8000/test-answer/{{ question.id }}"
+    var url_submit = "http://192.168.0.100:8000/answer/{{ question.id }}"
 
     button.addEventListener("click", function () {
-        var solution = document.getElementById('solution').value
+        var solution = editor.getValue()
 
         if (button.innerHTML === "Test") {
 
@@ -91,6 +116,7 @@
             // end
 
         } else {
+            editor.toTextArea()
             button.type = "submit"
             button.click()
         }

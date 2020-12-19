@@ -2,6 +2,16 @@
 
 {% load crispy_forms_tags %}
 
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/theme/monokai.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/addon/edit/closebrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/addon/selection/active-line.min.js"></script>
+{% endblock %}
+
 {% load static %}
 
 {% block content %}
@@ -19,9 +29,45 @@
     <form method="post">
         <div class="container">{% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="btn btn-outline-primary" id="form_button">Submit</button>
+            <button type="button" class="btn btn-outline-primary" id="form_button">Submit</button>
         </div>
     </form>
 </div>
 
+
+<script type="text/javascript">
+    var s_editor = new CodeMirror.fromTextArea(document.getElementById('solution'), {
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        indentUnit: 4,
+        indentWithTabs: false,
+        lineWrapping: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        styleActiveLine: true,
+    });
+
+    var q_editor = new CodeMirror.fromTextArea(document.getElementById('test_case'), {
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        indentUnit: 4,
+        indentWithTabs: false,
+        lineWrapping: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        styleActiveLine: true,
+    });
+
+    var button = document.getElementById('form_button')
+
+    button.addEventListener("click", function () {
+        s_editor.toTextArea()
+        q_editor.toTextArea()
+        button.type = "submit"
+        button.click()
+    })
+
+</script>
 {% endblock %}

@@ -7,6 +7,11 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ("title", "question", "solution", "test_case")
 
+        widgets = {
+            'solution': forms.Textarea(attrs={'id': 'solution', }),
+            'test_case': forms.Textarea(attrs={'id': 'test_case', }),
+        }
+
 
 class AnswerForm(forms.ModelForm):
     class Meta:
@@ -14,5 +19,5 @@ class AnswerForm(forms.ModelForm):
         fields = ("answer",)
 
         widgets = {
-            'answer': forms.Textarea(attrs={'id': 'solution', "onKeyUp": "text_change()"}),
+            'answer': forms.Textarea(attrs={'id': 'solution',}),
         }
