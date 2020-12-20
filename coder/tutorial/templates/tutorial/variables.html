@@ -16,7 +16,7 @@
 
     <div class="col-md-3">
         <div class="content-section">
-            <h3>Table Of Contant</h3>
+            <h5>Table Of Contant</h5>
             <ul class="list-group">
                 <li class="list-group-item list-group-item-light">
                     <a href="{% url 'tutorial:intro' %}">
@@ -54,7 +54,45 @@
     </div>
 
     <div class="col-md-8">
-        <p>variables</p>
+        <h2>Variables And Operations</h2>
+        <p>
+            Python offers a wide range of variable types for storing.
+        <pre><code>
+integer = 3 # int
+number = 3.3 # float
+string = “Hello World!” # str
+complex = 4j + 2 # complex number
+truth = True # boolean
+</pre></code>
+
+        Python also offers data structures.
+        <pre><code>
+collection = [1, 2, 3, “hello”, 3.3] # list
+Immutable = (1, 2, 3, “hello”, 3.3) # tuple
+dictionary = {“hello”: “world”, “program”: “python”} # dictionary
+</pre></code>
+        Operations on numbers
+        <pre><code>
+x = 27
+y = 4
+            
+print(x + y) # Addition
+print(x - y) # subtraction
+print(x * y) # multiplication
+print(x / y) # division
+print(x % y) # reminder / modulus
+print(x // y) # division integer
+print(x ** y) # exponent
+</pre></code>
+
+        Note: You can concatenate strings by
+        <pre><code>
+first_name = “Donald ”
+last_name = “Trump”
+print(first_name + last_name)
+</pre></code>
+
+        </p>
     </div>
 
 </div>

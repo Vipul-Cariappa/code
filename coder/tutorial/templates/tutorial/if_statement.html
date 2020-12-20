@@ -16,7 +16,7 @@
 
     <div class="col-md-3">
         <div class="content-section">
-            <h3>Table Of Contant</h3>
+            <h5>Table Of Contant</h5>
             <ul class="list-group">
                 <li class="list-group-item list-group-item-light">
                     <a href="{% url 'tutorial:intro' %}">
@@ -54,7 +54,40 @@
     </div>
 
     <div class="col-md-8">
-        <p>if</p>
+        <h2>if statement</h2>
+        <p>
+            When building an application we would like to do one thing for a specific action and another for some other
+            action. This
+            is accomplished using if else statements. Code written inside a if block only gets executed if the condition
+            is met else
+            code in else block gets executed.
+            Example
+        <pre><code>
+# to find is given number odd or even
+
+x = input(“Enter a number: “)
+x = int(x)
+
+if x % 2 == 0:
+    print(“Given number is even”)
+else:
+    print(“Given number is odd”)
+</pre></code>
+
+        To add more condition python lets you use else if condition
+        Example:
+        <pre><code>
+# to find if given number is positive, negative or zero
+x = int(input(“Enter a number: ”))
+if x > 0:
+    print(“Positive”)
+elif x < 0:
+    print(“Negative”) 
+else: 
+    print(“Number is Zero”) 
+</pre></code>
+
+        </p>
     </div>
 
 </div>

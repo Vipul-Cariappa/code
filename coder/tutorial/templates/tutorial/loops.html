@@ -17,7 +17,7 @@
 
     <div class="col-md-3">
         <div class="content-section">
-            <h3>Table Of Contant</h3>
+            <h5>Table Of Contant</h5>
             <ul class="list-group">
                 <li class="list-group-item list-group-item-light">
                     <a href="{% url 'tutorial:intro' %}">
@@ -55,7 +55,55 @@
     </div>
 
     <div class="col-md-8">
-        <p>Loops</p>
+        <h2>loops</h2>
+        <p>
+            In some cases doing a task repeatedly is required. Example to get sum of list of numbers. For doing tasks
+            which are
+            repetitive in nature python gives loops. There are two types of while loops and for loops.
+
+            The while loop in Python is used to iterate over a block of code as long as the test expression (condition)
+            is true.
+
+        <pre><code>
+# summing n natural numbers using while loop
+n = int(input(“Enter a number: “))
+
+sum = 0
+
+while n > 0:
+    sum += n
+    n -= 1
+
+print(sum)
+        </pre></code>
+
+        The for loop in Python is used to iterate over a sequence (list, tuple, string) or other iterable objects.
+        <pre><code>
+# summing a list of numbers
+x = [12, 34, 4, 57, 78, 45, 65]
+
+sum = 0
+
+for i in x:
+    sum += i
+
+print(sum)
+            </pre></code>
+        Another example:
+        <pre><code>
+# summing n natural numbers using for loop
+
+n = int(input(“Enter a number: “))
+
+sum = 0
+
+for i in range(n):
+    sum += i
+
+print(sum)
+            </pre></code>
+
+        </p>
     </div>
 
 </div>

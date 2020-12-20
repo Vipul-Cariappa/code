@@ -17,7 +17,7 @@
 
     <div class="col-md-3">
         <div class="content-section">
-            <h3>Table Of Contant</h3>
+            <h5>Table Of Contant</h5>
             <ul class="list-group">
                 <li class="list-group-item list-group-item-light">
                     <a href="{% url 'tutorial:intro' %}">
@@ -55,7 +55,32 @@
     </div>
 
     <div class="col-md-8">
-        <p>Functions</p>
+        <h2>functions</h2>
+        <p>
+            In Python, a function is a group of related statements that performs a specific task.
+
+            Functions help break our program into smaller and modular chunks. As our program grows larger and larger,
+            functions make
+            it more organized and manageable.
+
+            Furthermore, it avoids repetition and makes the code reusable.
+        <pre><code>
+# function which takes in a list and return sum of the list
+
+def sum(list):
+    sum = 0
+
+    for i in list:
+        sum += i
+
+    return sum
+
+x = [23, 45, 23, 67, 25, 69, 13]
+
+print(sum(x))
+        </pre></code>
+
+        </p>
     </div>
 
 </div>
