@@ -1,5 +1,8 @@
 def validate(answer):
-    return True
+    if answer.split("\n")[0].startswith("def function("):
+        return all(True if i not in ["exec", "eval", "import",
+                                     "from"] else False for i in answer.split())
+    return False
 
 
 def run_tests(answer, test):
