@@ -18,7 +18,7 @@
 
 {% if messages %}
 {% for message in messages %}
-<div class="alert alert-primary" role="alert" id="error">
+<div class="alert alert-primary" role="alert">
     {{message}}
 </div>
 {% endfor %}
@@ -31,7 +31,10 @@
 
 
 <div class="container">
-    {{ question.question }}
+    <h2>{{ question.title}}</h2>
+    <p>
+        {{ question.question }}
+    </p>
     <form method="post">
         <div class="container">{% csrf_token %}
             {{ form|crispy }}
@@ -83,8 +86,8 @@
 
     var button = document.getElementById('form_button')
     var error_ele = document.getElementById('error')
-    var url_test = "http://192.168.0.100:8000/test-answer/{{ question.id }}"
-    var url_submit = "http://192.168.0.100:8000/answer/{{ question.id }}"
+    var url_test = "http://127.0.0.1:8000/test-answer/{{ question.id }}"
+    var url_submit = "http://127.0.0.1:8000/answer/{{ question.id }}"
 
     button.addEventListener("click", function () {
         var solution = editor.getValue()
