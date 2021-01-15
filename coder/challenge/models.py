@@ -9,7 +9,8 @@ class Question(models.Model):
     question = models.TextField()
     solution = models.TextField()
     test_case = models.TextField()
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title

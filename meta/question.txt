@@ -1,20 +1,30 @@
 question:
-Fibonacci Series.
+Fibonacci Series
+
+statement:
+Write a function called function which takes one argument x which is a integer. The function should calculate xth fibonacci number and return the result.
+Fibonacci Series is create by adding previous two numbers of the series and it starts from 0, 1.
+Fibonacci Series:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
+
 
 solution:
 def function(x):
-  if x < 3:
-    return 1
-  return function(x-1) + function(x-2)
+    a = 0
+    b = 1
+    
+    if x == 1:
+        return a
+    elif x == 2:
+        return b
 
+    for i in range(x-2):
+        a, b = b, a+b
+
+    return b
 
 test case:
 def test_case(func):
-  assert func(1) == 1
+  assert func(1) == 0
   assert func(2) == 1
-  assert func(3) == 2
+  assert func(13) == 144
 
-
-Evaluate test:
-def evaluate(func):
-  assert func(3) == 2

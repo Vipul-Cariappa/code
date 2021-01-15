@@ -91,7 +91,7 @@ DATABASES = {
 #         'OPTIONS': {
 #             'database ': 'Coder',
 #             'user ': 'root',
-#             'password': 'root',
+#             'password': 'root1234',
 #         },
 #     }
 # }
