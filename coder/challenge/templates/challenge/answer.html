@@ -65,7 +65,6 @@
     var csrftoken = getCookie('csrftoken');
 
     var editor = new CodeMirror.fromTextArea(document.getElementById('solution'), {
-        value: "def function(...):\n    # code goes here", // not working
         lineNumbers: true,
         mode: "python",
         theme: "monokai",
@@ -75,7 +74,10 @@
         matchBrackets: true,
         autoCloseBrackets: true,
         styleActiveLine: true,
+        // readOnly: true,
     });
+
+    editor.setValue("def function(...):\n    # code goes here")
 
 
     editor.on("keydown", function () {

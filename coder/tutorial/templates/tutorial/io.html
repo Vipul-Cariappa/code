@@ -2,6 +2,13 @@
 
 {% load static %}
 
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/theme/monokai.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/python/python.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 {% if messages %}
@@ -57,19 +64,47 @@
     <div class="col-md-8">
         <h2>Input / Output </h2>
         <p>
-            To display any text or number to standard out print function is used.
-        <pre><code>
-print("Hello World!")</pre></code>
-        To get input from users from standard in input function is used.
-        <pre><code>
-x = input("What Is your name? ")</pre></code>
-        Program to say hello to users by name.
-        <pre><code>
+            To display any text or number to standard out print function is used.<br><br>
+            <textarea id="code1">
+print("Hello World!")</textarea><br><br>
+            To get input from users from standard in input function is used.<br><br>
+            <textarea id="code2">
+x = input("What Is your name? ")</textarea><br><br>
+            Program to say hello to users by name.<br><br>
+            <textarea id="code3">
 x = input("Please Enter Your Name: ")
-print("Hello ", x)</pre></code>
+print("Hello ", x)</textarea>
         </p>
 
     </div>
 
 </div>
+
+<script type="text/javascript">
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code1'), {
+        value: document.getElementById('code1').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code2'), {
+        value: document.getElementById('code2').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code3'), {
+        value: document.getElementById('code3').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+</script>
 {% endblock %}

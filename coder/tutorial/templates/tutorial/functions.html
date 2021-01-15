@@ -2,6 +2,13 @@
 
 {% load static %}
 
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/theme/monokai.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/python/python.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 {% if messages %}
@@ -64,7 +71,10 @@
             it more organized and manageable.
 
             Furthermore, it avoids repetition and makes the code reusable.
-        <pre><code>
+            <br><br>Example: <br>
+
+
+            <textarea id="code">
 # function which takes in a list and return sum of the list
 
 def sum(list):
@@ -78,10 +88,23 @@ def sum(list):
 x = [23, 45, 23, 67, 25, 69, 13]
 
 print(sum(x))
-        </pre></code>
+</textarea>
+            <br><br>
 
         </p>
     </div>
 
 </div>
+
+<script type="text/javascript">
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code'), {
+        value: document.getElementById('code').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+</script>
+
 {% endblock %}

@@ -2,6 +2,13 @@
 
 {% load static %}
 
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/theme/monokai.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/python/python.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 {% if messages %}
@@ -62,11 +69,11 @@
             repetitive in nature python gives loops. There are two types of while loops and for loops.
 
             The while loop in Python is used to iterate over a block of code as long as the test expression (condition)
-            is true.
+            is true.<br><br>
 
-        <pre><code>
+            <textarea id="code1">
 # summing n natural numbers using while loop
-n = int(input(“Enter a number: “))
+n = int(input("Enter a number: "))
 
 sum = 0
 
@@ -75,10 +82,11 @@ while n > 0:
     n -= 1
 
 print(sum)
-        </pre></code>
+        </textarea><br><br>
 
-        The for loop in Python is used to iterate over a sequence (list, tuple, string) or other iterable objects.
-        <pre><code>
+            The for loop in Python is used to iterate over a sequence (list, tuple, string) or other iterable objects.
+            <br><br>
+            <textarea id="code2">
 # summing a list of numbers
 x = [12, 34, 4, 57, 78, 45, 65]
 
@@ -88,12 +96,12 @@ for i in x:
     sum += i
 
 print(sum)
-            </pre></code>
-        Another example:
-        <pre><code>
+            </textarea><br><br>
+            Another example:<br><br>
+            <textarea id="code3">
 # summing n natural numbers using for loop
 
-n = int(input(“Enter a number: “))
+n = int(input("Enter a number: "))
 
 sum = 0
 
@@ -101,10 +109,40 @@ for i in range(n):
     sum += i
 
 print(sum)
-            </pre></code>
+            </textarea>
 
         </p>
     </div>
 
 </div>
+
+<script type="text/javascript">
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code1'), {
+        value: document.getElementById('code1').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code2'), {
+        value: document.getElementById('code2').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code3'), {
+        value: document.getElementById('code3').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+</script>
+
 {% endblock %}

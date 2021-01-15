@@ -2,6 +2,13 @@
 
 {% load static %}
 
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/theme/monokai.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/python/python.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 {% if messages %}
@@ -55,24 +62,24 @@
 
     <div class="col-md-8">
         <h2>Variables And Operations</h2>
-        <p>
-            Python offers a wide range of variable types for storing.
-        <pre><code>
+        <p><br>
+            Python offers a wide range of variable types for storing.<br><br>
+            <textarea id="code1">
 integer = 3 # int
 number = 3.3 # float
-string = “Hello World!” # str
-complex = 4j + 2 # complex number
+string = "Hello World!" # str
+complex_num = 4j + 2 # complex number
 truth = True # boolean
-</pre></code>
+</textarea><br><br>
 
-        Python also offers data structures.
-        <pre><code>
-collection = [1, 2, 3, “hello”, 3.3] # list
-Immutable = (1, 2, 3, “hello”, 3.3) # tuple
-dictionary = {“hello”: “world”, “program”: “python”} # dictionary
-</pre></code>
-        Operations on numbers
-        <pre><code>
+            Python also offers data structures.<br><br>
+            <textarea id="code2">
+collection = [1, 2, 3, "hello", 3.3] # list
+Immutable = (1, 2, 3, "hello", 3.3) # tuple
+dictionary = {"hello": "world", "program": "python"} # dictionary
+</textarea><br><br>
+            Operations on numbers<br><br>
+            <textarea id="code3">
 x = 27
 y = 4
             
@@ -83,17 +90,56 @@ print(x / y) # division
 print(x % y) # reminder / modulus
 print(x // y) # division integer
 print(x ** y) # exponent
-</pre></code>
+</textarea><br><br>
 
-        Note: You can concatenate strings by
-        <pre><code>
-first_name = “Donald ”
-last_name = “Trump”
+            Note: You can concatenate strings by<br><br>
+            <textarea id="code4">
+first_name = "Donald"
+last_name = "Trump"
 print(first_name + last_name)
-</pre></code>
+</textarea>
 
         </p>
     </div>
 
 </div>
+
+<script type="text/javascript">
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code1'), {
+        value: document.getElementById('code1').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code2'), {
+        value: document.getElementById('code2').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code3'), {
+        value: document.getElementById('code3').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+
+    var editor = new CodeMirror.fromTextArea(document.getElementById('code4'), {
+        value: document.getElementById('code4').value,
+        lineNumbers: true,
+        mode: "python",
+        theme: "monokai",
+        lineWrapping: true,
+        readOnly: true,
+    });
+</script>
+
 {% endblock %}
