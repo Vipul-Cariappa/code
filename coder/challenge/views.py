@@ -82,13 +82,15 @@ def answer_test(request, question_id):
                 limit_resource(run_tests, time=15,
                                memory=75, args=(ans, question.test_case))
             except AssertionError:
-                content = {"result": "failed", "error": "Assertion Error"}
+                content = {"result": "failed", "error": "Not the Expected Output"}
             except TimeoutError:
                 content = {"result": "failed", "error": "Timeout Error"}
             except MemoryError:
                 content = {"result": "failed", "error": "Memory Error"}
             except Exception as e:
-                content = {"result": "failed", "error": f"{e}"}
+                content = {"result": "failed", "error": "some error occurred"}
+                # content = {"result": "failed", "error": f"{e}"}
+                print(e)
             else:
                 content = {"result": "passed"}
         else:

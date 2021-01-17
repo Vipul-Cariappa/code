@@ -11,6 +11,7 @@ pip install django django-crispy-forms py-utility django-cors-headers
 cd coder
 python manage.py makemigrations challenge
 python manage.py migrate
+python manage.py loaddata questions.json
 python manage.py runserver
 </code></pre>
 

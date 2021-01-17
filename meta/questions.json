@@ -1,0 +1,35 @@
+[
+{
+  "model": "challenge.question",
+  "pk": 1,
+  "fields": {
+    "title": "Fibonacci Series",
+    "question": "Write a function called function which takes one argument x which is a integer. The function should calculate xth fibonacci number and return the result.\r\nFibonacci Series is create by adding previous two numbers of the series and it starts from 0, 1.\r\nFibonacci Series:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...",
+    "solution": "def function(x):\r\n    a = 0\r\n    b = 1\r\n    \r\n    if x == 1:\r\n        return a\r\n    elif x == 2:\r\n        return b\r\n\r\n    for i in range(x-2):\r\n        a, b = b, a+b\r\n\r\n    return b",
+    "test_case": "def test_case(func):\r\n  assert func(1) == 0\r\n  assert func(2) == 1\r\n  assert func(13) == 144",
+    "created_by": null
+  }
+},
+{
+  "model": "challenge.question",
+  "pk": 2,
+  "fields": {
+    "title": "Sorting",
+    "question": "Write a function called function which takes in list of numbers and returns sorted list in ascending order.",
+    "solution": "def function(li):\r\n    for i in range(len(li)):\r\n        for j in range(len(li)-1-i):\r\n            if li[j] > li[j+1]:\r\n                li[j], li[j+1] = li[j+1], li[j]\r\n\r\n    return li",
+    "test_case": "def test_case(func):\r\n    x = [12, 2, 23, 43, 5, 32, 456, 78, 34, 13, 67, 978, 34, 24, 78, 45, 23, 4, 7, 65, 32, 34, 57, 79, 45, 23, 456, 889, 45]\r\n    assert func(x) == sorted(x)\r\n    x = [123, 324, 54321, 4, 332, 45, 7, 68, 43, 5, 23, 56, 89, 6547, 34, 124, 64, 786, 4, 214, 578, 754, 32, 1454,  678]\r\n    assert func(x) == sorted(x)",
+    "created_by": null
+  }
+},
+{
+  "model": "challenge.question",
+  "pk": 3,
+  "fields": {
+    "title": "Searching",
+    "question": "Write a function called function which takes in a list of numbers and a number. The function should search for the number in the list and return the index of the element where the number is present. If the element or number is not present in the list than return None.",
+    "solution": "def function(li, x):\r\n    for i in range(len(li)):\r\n        if li[i] == x:\r\n            return i\r\n    return None",
+    "test_case": "def test_case(func):\r\n    assert func([1,2,3,4,5,6,7,6,5,4,3,2,1], 7) == 6",
+    "created_by": null
+  }
+}
+]
