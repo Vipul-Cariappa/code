@@ -1,6 +1,6 @@
 # code
 code is a web application where you can test your program solving skills. Create and upload your own programming questions and puzzles for others to solve. And get evaluated based on the memory and execution time.
-<br>
+<br><br>
 To Setup, Run <br>
 
 <pre><code>git clone https://github.com/Vipul-Cariappa/code.git
